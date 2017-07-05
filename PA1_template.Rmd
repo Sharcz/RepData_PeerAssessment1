@@ -9,7 +9,7 @@ output:
 
 ## Loading and preprocessing the data
 
-```{r dataload, cache=TRUE}
+```{r loaddata}
 library(readr)
 activity <- read_csv("activity.csv", 
     col_types = cols(date = col_date(format = "%Y-%m-%d")))
@@ -17,7 +17,7 @@ activity <- read_csv("activity.csv",
 
 ## What is the total number of steps taken per day?
 
-```{r total steps}
+```{r totalsteps}
 total.steps <- aggregate(steps ~ date, activity, sum)
 hist(total.steps$steps)
 mean(total.steps$steps) ## mean of total steps taken per day
@@ -27,7 +27,7 @@ median(total.steps$steps) ## median of total steps taken per day
 
 ## What is the average daily pattern?
 
-```{r average daily pattern}
+```{r dailypattern}
 intervals <- aggregate(steps ~ interval, activity, mean) # average step data over each interval
 plot (intervals$interval, intervals$steps, type ="l")
 intervals[which.max(intervals$steps),1] # The five-minute interval which contains the maximum number of steps
@@ -37,7 +37,7 @@ intervals[which.max(intervals$steps),1] # The five-minute interval which contain
 The missing values (coded as NA) in each interval will be replaced by the mean value of that interval, as calculated in the previous section.  
 
 
-```{r NA impute data}
+```{r impute}
 sum(rowSums(is.na(activity))) ## number of rows with NA values
 ## impute missing values with the average interval values calculated in previous section
 impute = merge(activity, intervals, by="interval", suffixes=c(".activity", ".intervals"))
@@ -52,7 +52,7 @@ Using imputed data, the mean has remained the same (10766.19), while the median 
 
 ## Activity patterns between weekdays and weekends
 
-```{r weekday vs weekend}
+```{r weekday}
 ## create a 'weekday' factor variable to make 'weekend' and 'weekday' levels
 impute$weekday <- ifelse(weekdays(impute$date) == "Saturday" | 
         weekdays(impute$date) =="Sunday", "weekend", "weekday")

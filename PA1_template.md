@@ -19,7 +19,7 @@ total.steps <- aggregate(steps ~ date, activity, sum)
 hist(total.steps$steps)
 ```
 
-![](PA1_template_files/figure-html/total steps-1.png)<!-- -->
+![](PA1_template_files/figure-html/totalsteps-1.png)<!-- -->
 
 ```r
 mean(total.steps$steps) ## mean of total steps taken per day
@@ -45,7 +45,7 @@ intervals <- aggregate(steps ~ interval, activity, mean) # average step data ove
 plot (intervals$interval, intervals$steps, type ="l")
 ```
 
-![](PA1_template_files/figure-html/average daily pattern-1.png)<!-- -->
+![](PA1_template_files/figure-html/dailypattern-1.png)<!-- -->
 
 ```r
 intervals[which.max(intervals$steps),1] # The five-minute interval which contains the maximum number of steps
@@ -77,7 +77,7 @@ imputed.steps <- aggregate(steps ~ date, impute, sum)
 hist(imputed.steps$steps)
 ```
 
-![](PA1_template_files/figure-html/NA impute data-1.png)<!-- -->
+![](PA1_template_files/figure-html/impute-1.png)<!-- -->
 
 ```r
 mean(imputed.steps$steps) ## mean of total imputed steps taken per day
@@ -115,6 +115,6 @@ plot (weekend.intervals$interval, weekend.intervals$steps, type ="l", main = "we
 plot (weekday.intervals$interval, weekday.intervals$steps, type ="l", main = "weekday")
 ```
 
-![](PA1_template_files/figure-html/weekday vs weekend-1.png)<!-- -->
+![](PA1_template_files/figure-html/weekday-1.png)<!-- -->
   
 It is reasonable to conclude that activity is spread throughout weekend days, whereas activity is higher in the mornings (before 9:30am) on weekdays.
